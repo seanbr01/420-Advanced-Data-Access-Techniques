@@ -1,0 +1,21 @@
+To have the node server return whatever html, js, css, files you want ...
+use the res.sendFile(  
+in the route.js file.  Have it return an html file, which in turns pulls whatever JS and css files it needs.
+
+
+
+
+
+
+
+
+another way that seems to be better for just a little bit of html
+
+Just add a dot to the end of line to start submitting pure html.
+If that does the trick for you then try:
+
+doctype html              
+html. // THAT DOT
+    <body>     
+        <div>Hello, yes this is dog</div>
+    </body>
