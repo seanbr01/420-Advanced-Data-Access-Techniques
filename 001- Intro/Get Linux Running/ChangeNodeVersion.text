@@ -1,0 +1,57 @@
+Using Express to create a node.js server fails on newer versions of node
+
+If you try to run express to create a new node.js project, and you see this error:
+TypeError [ERR_INVALID_CALLBACK]: Callback must be a function
+
+most likley you need to move back to a pre-ver 10 version of node.js.
+
+--------------------------------------------------------------------------------------------------------
+
+To see which version of node you are running, enter:
+
+node - v
+
+you will likely see  v10.16.3
+
+--------------------------------------------------------------------------------------------------------
+
+to change to an older or newer version enter these commands:
+
+sudo npm cache clean -f 
+
+	(system will  say:  npm WARN using --force I sure hope you know what you are doing.)
+
+sudo npm install -g n     
+
+now decide if you want to get the latest version, or an older vesion.
+For our course rigth now, if you have the above error, you want roll back to a pre- v10 version.
+Do this:
+
+ sudo n 9.10.1                                   (gets  v9.10.1)
+
+sudo ln -sf /usr/local/n/versions/node/9.10.1/bin/node /usr/bin/node
+
+type
+node - v
+
+should see v9.10.1
+
+express should now work.
+
+========================================
+
+now when we move to angular, we need to be on a newer version, so
+
+
+sudo npm cache clean -f 
+
+	(system will  say:  npm WARN using --force I sure hope you know what you are doing.)
+
+sudo npm install -g n     
+
+sudo n stable   (gets latest)
+(replies  installing : node-v12.14.1 )    (use that version number in the next command)
+
+sudo ln -sf /usr/local/n/versions/node/12.14.1/bin/node /usr/bin/node
+
+

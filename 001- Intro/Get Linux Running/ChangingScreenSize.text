@@ -1,0 +1,9 @@
+Never use any linux command or menu choice to change the screen size.
+
+Instead, close all apps, drag the window corner to the size you want,
+and then reboot.  If the current size is too big for the screen, you have to use the scroll
+sliders on the rigth side and bottom of the screen to find the  zero-1 power icon in
+the lower right corner.  Click that and use the re-start option.
+
+That always works, whereas other ways often leads to a system that will not
+show the screen.

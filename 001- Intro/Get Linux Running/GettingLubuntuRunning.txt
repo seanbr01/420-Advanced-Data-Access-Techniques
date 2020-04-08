@@ -1,0 +1,45 @@
+
+To install on your home computer:
+Go to this web site:    https://www.virtualbox.org/wiki/Downloads
+and download and install Virtual Box for your computer type.
+After than is done, go to the same site and download and install its MATCHING version extensions,  VirtualBox Extension Pack.  Now you have a VM hosting environment at home.
+
+Now for both home and the school computer, you need an operating system to install.
+
+To get the Linux we are going to use, go here and download the VM image
+
+https://drive.google.com/open?id=1ZBOWjo_t7mqsOHifXLdFN3BrAPUZRt88
+
+
+2020 winter version  (Prog 209)
+
+That is a huge file, like about 6 gigabytes, and will take a few minutes. It will likely show up in your Download folder as a xxxxxx.OVA file.  When it is done, just double click on it, and it will install itself onto your Virtual Box Host.
+
+When it is done, start up the Virtual Box manager, click on the VM, and tell it to start.
+
+Two super important things you must do to prevent corrupting your Linux and having
+to start all over again:
+1) DO NOT try and change the window size the this Linux starts out with.  We will cover 
+how to safely do this later.  
+2) Always shut down your Linux before leaving the class room or turning off your home
+computer.
+
+After you start it up, you can log into a pre-exiting account called bcuser
+the password is the same bcuser (later, when you want to do privileged operations,
+you will use a command called sudo, and it needs that same password).
+
+Lastly, make one change for git:
+enter this command to edit the git config file
+  >>  git config --global -e
+
+using arrow keys, find my name and password for github, and edit those 2 strings to by your GitHub sign-in
+
+type in  
+ >> cntl O  
+
+then just hit Enter key  (to accept the file name to be writtenenter
+
+then type 
+  >>  cntl X  
+
+[ note for Kurt, this is on bckurtfriedrich@gmail.com gdrive ] 
