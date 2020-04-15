@@ -1,0 +1,49 @@
+﻿
+Hadoop Shell Commands for parralel  file system
+===========================================================================
+You will see we keep getting (non-critical) dfs errors are because we have a 32 bit library on a 64 bit  
+machine.
+===============================================================================
+
+hadoop fs -cat file:/somefilename   --- dump that linux file out to screen
+hadoop fs -cat hdfs://nn1.exampe.com/file1 --- dump that hdfs file out to screen
+hadoop fs -mkdir /user/hadoop/dir2  --- make a new dir in hdfs
+hadoop fs -copyFromLocal <some local file spec> <some local file spec> --- copy from linux fs into linux
+hadoop fs -put <some linux file> hdfs://nn.exampe.com/hadoop/hadoopfile --- copy from linux fs into hdfs
+sudo hadoop jar <jarFileName> <methodName> <fromDir> <toDir>
+hadoop fs -ls /user/hadoop/dir  --- list contents of a dir on the hdfs (why not have to day hdfs: ??)
+hadoop fs -get /user/hadoop/file <localfile>
+hadoop fs -rm hdfs:/path/to/file  << remove file
+hadoop fs -rm -r hdfs:/user/training   << removes training directory
+
+===============================================================================
+ 
+Something I had to do once, but already done on your VM.
+
+bcuser@autumn14:~$ /usr/local/hadoop/bin/hadoop namenode -format
+
+============================================================================
+Starting and Stopping Hadoop and dfs
+
+In general (don't do it now)   to START  hadoop, after changing user to hduser and dir to /usr/local/hadoop:
+  start-dfs.sh                                         (will have to enter password 3 times)
+  start-yarn.sh                                      (will have to enter password 1 or 2 times)
+  mr-jobhistory-daemon.sh start historyserver        (this may not be required)
+
+Then, to see that these 3 progams are in fact running. use command
+   jps
+
+Should see something like
+   3298 JobHistoryServer
+   3331 Jps
+   2741 SecondaryNameNode
+   2581 DataNode
+   2877 ResourceManager
+   3183 NodeManager
+
+
+To STOP hadoop,   run the following commands
+   stop-dfs.sh                   (2 pw’s)
+   stop-yarn.sh                (1 pw)
+
+=====================================================================

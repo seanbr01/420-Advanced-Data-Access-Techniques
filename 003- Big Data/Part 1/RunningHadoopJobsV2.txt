@@ -1,0 +1,275 @@
+﻿We will now run your first Hadoop MapReduce job. 
+
+We will use the WordCount example job which reads text files and counts how often words occur is 3 books we will download from the web.  The input is these text files and the output is new text files, 
+each  line of which contains a word and the count of how often it occurred, separated by a tab. 
+(More  information of what happens behind the scenes is available at the Hadoop Wiki.
+http://wiki.apache.org/hadoop/WordCount )
+
+
+
+[1] Download your sample input data, we will use three ebooks from Project Gutenberg for this example:
+
+First, make a new directory to hold the books:
+    /home/bcuser/temp/ebooks
+
+Then go to:
+
+The Outline of Science, Vol. 1 (of 4) by J. Arthur Thomson    
+http://www.gutenberg.org/ebooks/20417
+
+The Notebooks of Leonardo Da Vinci                                     
+http://www.gutenberg.org/ebooks/5000  (do a back on the browser and just edit the 20417 to be a 5000)
+
+Ulysses by James Joyce                                                               
+http://www.gutenberg.org/ebooks/4300
+
+
+After open each link, from the many choices,  choose the text files in Plain Text UTF-8 encoding.
+After you click that, and see the book, just right click and say "save as" and save into
+
+    /home/bcuser/temp/ebooks
+
+======================================
+
+[2] Now copy these 3 Hadoop input data files from the linux file system over into the HDFS file system
+
+Change user to hduser  (same PW as bcuser)
+  su hduser      
+
+make a new folder  where we will later move the results of the compuation from HDFS to:
+   /home/hduser/temp/ 
+
+Now in your console window, go to Hadoop dir:   
+   cd /usr/local/hadoop
+
+Start up Hadoop:   
+   start-dfs.sh 
+   start-yarn.sh
+   mr-jobhistory-daemon.sh start historyserver
+
+enter jps and see you have everything running
+
+Now that hadoop and HDFS are running, we can manipulate our HDFS files and dir's:
+Create needed directories in the HDFS file system (if they don’t already exist)  by making calls on bin/hadoop dfs
+(I'm not sure if the -p option lets you do this as one command,  ... this is HDFS, not Linux.)
+   bin/hadoop dfs -mkdir /user
+   bin/hadoop dfs -mkdir /user/hduser
+   bin/hadoop dfs -mkdir /user/hduser/ebooks
+
+verify ebooks dfs directory is there:
+    bin/hadoop dfs -ls  /user/hduser
+
+success looks like (really!)
+    DEPRECATED: Use of this script to execute hdfs command is deprecated.
+    Instead use the hdfs command for it.
+    14/11/28 14:50:37 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your 
+    platform... using builtin-java classes where applicable
+    Found 1 items
+    drwxr-xr-x   - hduser supergroup          0 2014-11-28 14:50 /user/hduser/ebooks
+
+
+This next command copies the ebooks dir over from the /home/bcuser normal file system 
+and adds that directory and files in the hdfs file system
+   bin/hadoop dfs -copyFromLocal /home/bcuser/temp/ebooks  /user/hduser
+
+Verify they are there:
+   bin/hadoop dfs -ls  /user/hduser/ebooks
+success returns
+
+   DEPRECATED: Use of this script to execute hdfs command is deprecated.
+   Instead use the hdfs command for it.
+   14/11/27 23:18:49 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your 
+   platform... using builtin-java classes where applicable
+   Found 3 items
+   -rw-r--r--   1 bcuser supergroup     674570 2015-04-03 12:15 /user/hduser/ebooks/pg20417.txt
+   -rw-r--r--   1 bcuser supergroup    1573150 2015-04-03 12:15 /user/hduser/ebooks/pg4300.txt
+   -rw-r--r--   1 bcuser supergroup    1423803 2015-04-03 12:15 /user/hduser/ebooks/pg5000.txt
+
+
+[3] Now we run the hadoop command to run the wordcount example hadoop program:
+
+first make some dir  that hadoop needs to exist:
+
+    sudo mkdir -p /app/hadoop/tmp
+
+
+
+and set permissions to the that folder:
+
+
+   sudo chown hduser:hadoop /app/hadoop/tmp
+
+Now finally run the hadoop job: 
+
+
+bin/hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /user/hduser/ebooks /user/hduser/ebooks-outputebooks-output
+
+(Which says to Hadoop, run a program that is in a java class library called wordcount, using our new dfs 
+dir /ebooks as input, and write the output of the job in /ebooks-output )
+
+Which resulted in something like this being output:
+15/04/03 12:19:06 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+15/04/03 12:19:07 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+15/04/03 12:19:08 INFO input.FileInputFormat: Total input paths to process : 3
+15/04/03 12:19:09 INFO mapreduce.JobSubmitter: number of splits:3
+15/04/03 12:19:09 INFO mapreduce.JobSubmitter: Submitting tokens for job: 
+job_1428088122314_0001
+15/04/03 12:19:10 INFO impl.YarnClientImpl: Submitted application application_1428088122314_0001
+15/04/03 12:19:10 INFO mapreduce.Job: The url to track the job: 
+http://autumn14:8088/proxy/application_1428088122314_0001/
+15/04/03 12:19:10 INFO mapreduce.Job: Running job: job_1428088122314_0001
+15/04/03 12:19:19 INFO mapreduce.Job: Job job_1428088122314_0001 running in uber mode : false
+15/04/03 12:19:19 INFO mapreduce.Job:  map 0% reduce 0%
+15/04/03 12:19:38 INFO mapreduce.Job:  map 78% reduce 0%
+15/04/03 12:19:39 INFO mapreduce.Job:  map 100% reduce 0%
+15/04/03 12:19:46 INFO mapreduce.Job:  map 100% reduce 100%
+15/04/03 12:19:47 INFO mapreduce.Job: Job job_1428088122314_0001 completed successfully
+15/04/03 12:19:48 INFO mapreduce.Job: Counters: 49
+File System Counters
+FILE: Number of bytes read=1459105
+FILE: Number of bytes written=3307459
+FILE: Number of read operations=0
+FILE: Number of large read operations=0
+FILE: Number of write operations=0
+HDFS: Number of bytes read=3671872
+HDFS: Number of bytes written=880829
+HDFS: Number of read operations=12
+HDFS: Number of large read operations=0
+HDFS: Number of write operations=2
+Job Counters 
+Launched map tasks=3
+Launched reduce tasks=1
+Data-local map tasks=3
+Total time spent by all maps in occupied slots (ms)=53500
+Total time spent by all reduces in occupied slots (ms)=5813
+Total time spent by all map tasks (ms)=53500
+Total time spent by all reduce tasks (ms)=5813
+Total vcore-seconds taken by all map tasks=53500
+Total vcore-seconds taken by all reduce tasks=5813
+Total megabyte-seconds taken by all map tasks=54784000
+Total megabyte-seconds taken by all reduce tasks=5952512
+Map-Reduce Framework
+Map input records=77931
+Map output records=629172
+Map output bytes=6076092
+Map output materialized bytes=1459117
+Input split bytes=349
+Combine input records=629172
+Combine output records=101110
+Reduce input groups=82334
+Reduce shuffle bytes=14591171
+Reduce input records=101110
+Reduce output records=82334
+Spilled Records=202220
+Shuffled Maps =3
+Failed Shuffles=0
+Merged Map outputs=3
+GC time elapsed (ms)=660
+CPU time spent (ms)=8020
+Physical memory (bytes) snapshot=770199552
+Virtual memory (bytes) snapshot=7537471488
+Total committed heap usage (bytes)=541327360
+Shuffle Errors
+BAD_ID=0
+CONNECTION=0
+IO_ERROR=0
+WRONG_LENGTH=0
+WRONG_MAP=0
+WRONG_REDUCE=0
+File Input Format Counters 
+Bytes Read=3671523
+File Output Format Counters 
+Bytes Written=880829
+bcuser@autumn14:/usr/local/hadoop$
+
+
+
+[4] check if the output files are there
+
+     bin/hadoop dfs -ls /user/hduser/ebooks-outputebooks-output/
+which should write out:
+ lots of blah blah ... and then ending with these lines that says 2 files were indeed created
+
+Found 2 items
+-rw-r--r--   1 hduser supergroup          0 2018-01-06 21:44 /user/hduser/ebooks-outputebooks-output/_SUCCESS
+-rw-r--r--   1 hduser supergroup     878931 2018-01-06 21:44 /user/bhduser/ebooks-outputebooks-output/part-r-00000
+
+
+
+[5] Retrieve the job result from HDFS
+
+To inspect the file, you can just “cat” it out to the console with the command 
+     bin/hadoop dfs -cat /user/hduser/ebooks-outputebooks-output/part-r-00000
+
+
+(Or you can copy it from HDFS to the local file system, which we will do next)
+
+The cat command spits back all the word counts, ending up with this:
+...
+—You’re	10
+—Zinfandel	1
+—home	2
+—————	2
+—’Tis	2
+—’lldo!	1
+‘AS-IS’	1
+’46.	1
+’92	1
+’Slife,	1
+’Tis	8
+’Tis,	1
+’Twas	9
+’Twixt	1
+’em.	2
+’mid	1
+’neath	1
+’pon	1
+’s	1
+’tis	4
+’twas	4
+’twas.	1
+’twere,	1
+“Come	1
+“I	1
+“J”	1
+“Viator”	1
+“YOU	1
+•	1
+�	5
+�:	1
+�crit_	1
+�pieza;	1
+
+==========================================
+
+
+To  copy the results out from the hdfs to the local file system: both of the following commands work:
+       bin/hadoop dfs -copyToLocal /user/hduser/ebooks-outputebooks-output/part-r-00000  /home/hduser/temp
+       bin/hadoop dfs -getmerge /user/hduser/ebooks-outputebooks-output/* /home/hduser/temp/ebooks-output/result
+The first one copies out only a specific file, and copies it to a directory that must already exist.
+The second one will copy all the files out of the directory, and it will create a new target directory if required.
+
+Then you can open result with an editor, or use    head   to show just the beginning of the file: 
+head /home/hduser/temp/ebooks-output/result
+
+
+[6]  Cleanup from last run:
+Remove directories and last run’s output, or often Hadoop will fail, as it will not overwrite files.
+Use pcmanfm and go to   
+    /home/hduser/temp/   if you copied the output there
+and remove the ebooks-output directory, 
+
+Make sure Hadoop is still  running, then remove the dfs dir where hadoop wrote the output
+bin/hadoop dfs -rmr /user/hduser/ebooks-outputebooks-output
+
+maybe you want to get rid of the input books too
+bin/hadoop dfs -rmr /user/hduser/ebooks
+
+
+
+If you are done, stop hadoop!
+   stop-dfs.sh                   (3 pw’s)
+   stop-yarn.sh                (1 or 2 pw's)
+
+
+
