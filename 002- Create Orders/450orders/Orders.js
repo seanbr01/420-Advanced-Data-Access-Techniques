@@ -8,10 +8,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-  title: {
-    salesPersonID: Number,
-    required: true
-  },
   itemNumber: {
     type: Number,
     required: true
@@ -21,6 +17,10 @@ const OrderSchema = new Schema({
     required: true
   },
   pricePaid: {
+    type: Number,
+    required: true
+  },
+  salesPersonID: {
     type: Number,
     required: true
   }

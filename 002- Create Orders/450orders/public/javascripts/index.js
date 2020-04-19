@@ -34,4 +34,42 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
 
     });
+    
+    document.getElementById("bulk").addEventListener("click", function () {
+
+        $.get("/450RandomOrders/", function(orders, status){
+            for (let index = 0; index < orders.length; index++) {
+                $.ajax({
+                    url: '/NewOrder/' ,
+                    method: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(orders[index]),
+                    success: function (result) { }
+                });
+            }
+        })
+        
+    });
+
+    document.getElementById("display").addEventListener("click", function () {
+
+        document.getElementById("mongoDisplay").innerHTML = '';
+        $.get("/Orders/", function(orders, status){
+            for (let index = 0; index < orders.length; index++) {
+
+                var order = document.createElement("p");
+                var text = document.createTextNode("Order Number " + index + " " + JSON.stringify(orders[index]));
+                order.appendChild(text);
+
+                var element = document.getElementById("mongoDisplay");
+                element.appendChild(order);
+            };
+        })
+
+
+        
+
+    });
+
 });
