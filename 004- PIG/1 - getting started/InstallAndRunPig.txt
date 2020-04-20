@@ -1,0 +1,548 @@
+[1] Install Pig  (you do not have to have hadoop install, but you must have Java installed, my VM has it already)
+
+Instructions at this site:        https://pig.apache.org/docs/r0.7.0/setup.html
+
+Within that site, is the Download site. go here:    http://apache.cs.utah.edu/pig/
+
+ when you go there chose the version 16            Index of /pig/pig-0.16.0 
+download the file   pig-0.16.0.tar.gz   
+   (NOT the one with src in the name, we don't want the sources)
+
+
+Make a new dir:     /home/bcuser/pigstuff
+
+Cut and paste the downloaded pig-0.16.0.tar.gz file  to that new directory  
+
+Extract it there, then  delete the gz file  (our VMs will run out of virutal disk space, empty your trash often)
+
+Add Pig it to your path,  (You have to do this each time you re-start you VM, unless you copy it into your startup script!)
+export PATH=/home/bcuser/pigstuff/pig-0.16.0/bin:$PATH
+
+
+Verify it works:
+   pig -help   
+(will either fail, or write out lots of stuff if sucess)
+
+============================================================================================
+
+[2]  Setup and run a Pig job;  (we will find out which letter is most used as the starting letter in the words)
+See this article:   https://www.javatpoint.com/pig-example 
+ to see where I got my code ideas.
+
+Now in /home/bcuser/PigStuff  make a directory called PigJobs 
+(we will have many pig jobs inside this dir) 
+
+and in that dir, make a new dir for our 1st pig project, name it   1-MostStartingLetter
+
+In that dir,  create and edit an  ApplePie.txt file
+write our data this into it:
+
+An apple pie is a pie or a tart, in which the principal filling ingredient is apple. 
+It is, on occasion, served with whipped cream or ice cream on top, or with cheddar cheese. 
+The pastry is generally used top-and-bottom, making it a double-crust pie; 
+the upper crust may be a circular or a pastry lattice woven of crosswise strips. 
+Depending on the baker's preference, the bottom of the double-crust may be baked
+first to prevent the bottom from getting soggy. Exceptions are deep-dish apple pie, 
+with a top crust only, and open-face Tarte Tatin. Apple pie is an unofficial symbol of
+the United States and one of its signature comfort foods.
+
+Also in 1-PigMktdata dir,  create a new file named firstLetter.pig
+
+( .pig files are the scripts that we will submit to Pig)
+
+Paste this into it:
+
+lines  = LOAD 'ApplePie.txt' AS (eachLine: chararray);  
+
+eachWord = FOREACH lines GENERATE flatten(TOKENIZE(eachLine))   AS oneWord : chararray;  
+
+letters = FOREACH eachWord GENERATE  SUBSTRING(oneWord , 0,1)   AS  oneLetter : chararray;  
+
+lettergrp = GROUP letters by oneLetter;
+
+countletter  = FOREACH  lettergrp  GENERATE group  , COUNT(letters);  
+
+OrderCnt = ORDER countletter  BY  $1  DESC;  
+
+result  = LIMIT    OrderCnt    10;  
+
+DUMP result;
+
+then enter this command in a console at that directory:    pig -x local firstLetter.pig
+
+=========================================================
+
+Below is the out put for each of those phases.  If you keep change DUMP to write each one out at a time, 
+starting with lines, then eachWord, etc.
+
+lines
+(An apple pie is a pie or a tart, in which the principal filling ingredient is apple. )
+(It is, on occasion, served with whipped cream or ice cream on top, or with cheddar cheese. )
+(The pastry is generally used top-and-bottom, making it a double-crust pie; )
+(the upper crust may be a circular or a pastry lattice woven of crosswise strips. )
+(Depending on the baker's preference, the bottom of the double-crust may be baked)
+(first to prevent the bottom from getting soggy. Exceptions are deep-dish apple pie, )
+(with a top crust only, and open-face Tarte Tatin. Apple pie is an unofficial symbol of)
+(the United States and one of its signature comfort foods.)
+
+
+eachWord 
+(An)
+(apple)
+(pie)
+(is)
+(a)
+(pie)
+(or)
+(a)
+(tart)
+(in)
+(which)
+(the)
+(principal)
+(filling)
+(ingredient)
+(is)
+(apple.)
+(It)
+(is)
+(on)
+(occasion)
+(served)
+(with)
+(whipped)
+(cream)
+(or)
+(ice)
+(cream)
+(on)
+(top)
+(or)
+(with)
+(cheddar)
+(cheese.)
+(The)
+(pastry)
+(is)
+(generally)
+(used)
+(top-and-bottom)
+(making)
+(it)
+(a)
+(double-crust)
+(pie;)
+(the)
+(upper)
+(crust)
+(may)
+(be)
+(a)
+(circular)
+(or)
+(a)
+(pastry)
+(lattice)
+(woven)
+(of)
+(crosswise)
+(strips.)
+(Depending)
+(on)
+(the)
+(baker's)
+(preference)
+(the)
+(bottom)
+(of)
+(the)
+(double-crust)
+(may)
+(be)
+(baked)
+(first)
+(to)
+(prevent)
+(the)
+(bottom)
+(from)
+(getting)
+(soggy.)
+(Exceptions)
+(are)
+(deep-dish)
+(apple)
+(pie)
+(with)
+(a)
+(top)
+(crust)
+(only)
+(and)
+(open-face)
+(Tarte)
+(Tatin.)
+(Apple)
+(pie)
+(is)
+(an)
+(unofficial)
+(symbol)
+(of)
+(the)
+(United)
+(States)
+(and)
+(one)
+(of)
+(its)
+(signature)
+(comfort)
+(foods.)
+
+
+letters
+(A)
+(a)
+(p)
+(i)
+(a)
+(p)
+(o)
+(a)
+(t)
+(i)
+(w)
+(t)
+(p)
+(f)
+(i)
+(i)
+(a)
+(I)
+(i)
+(o)
+(o)
+(s)
+(w)
+(w)
+(c)
+(o)
+(i)
+(c)
+(o)
+(t)
+(o)
+(w)
+(c)
+(c)
+(T)
+(p)
+(i)
+(g)
+(u)
+(t)
+(m)
+(i)
+(a)
+(d)
+(p)
+(t)
+(u)
+(c)
+(m)
+(b)
+(a)
+(c)
+(o)
+(a)
+(p)
+(l)
+(w)
+(o)
+(c)
+(s)
+(D)
+(o)
+(t)
+(b)
+(p)
+(t)
+(b)
+(o)
+(t)
+(d)
+(m)
+(b)
+(b)
+(f)
+(t)
+(p)
+(t)
+(b)
+(f)
+(g)
+(s)
+(E)
+(a)
+(d)
+(a)
+(p)
+(w)
+(a)
+(t)
+(c)
+(o)
+(a)
+(o)
+(T)
+(T)
+(A)
+(p)
+(i)
+(a)
+(u)
+(s)
+(o)
+(t)
+(U)
+(S)
+(a)
+(o)
+(o)
+(i)
+(s)
+(c)
+(f)
+
+
+lettergrp
+(A,{(A),(A)})
+(D,{(D)})
+(E,{(E)})
+(I,{(I)})
+(S,{(S)})
+(T,{(T),(T),(T)})
+(U,{(U)})
+(a,{(a),(a),(a),(a),(a),(a),(a),(a),(a),(a),(a),(a),(a)})
+(b,{(b),(b),(b),(b),(b),(b)})
+(c,{(c),(c),(c),(c),(c),(c),(c),(c),(c)})
+(d,{(d),(d),(d)})
+(f,{(f),(f),(f),(f)})
+(g,{(g),(g)})
+(i,{(i),(i),(i),(i),(i),(i),(i),(i),(i),(i)})
+(l,{(l)})
+(m,{(m),(m),(m)})
+(o,{(o),(o),(o),(o),(o),(o),(o),(o),(o),(o),(o),(o),(o),(o),(o)})
+(p,{(p),(p),(p),(p),(p),(p),(p),(p),(p),(p)})
+(s,{(s),(s),(s),(s),(s)})
+(t,{(t),(t),(t),(t),(t),(t),(t),(t),(t),(t),(t),(t)})
+(u,{(u),(u),(u)})
+(w,{(w),(w),(w),(w),(w),(w)})
+
+
+
+countletter
+(A,2)
+(D,1)
+(E,1)
+(I,1)
+(S,1)
+(T,3)
+(U,1)
+(a,13)
+(b,6)
+(c,9)
+(d,3)
+(f,4)
+(g,2)
+(i,10)
+(l,1)
+(m,3)
+(o,15)
+(p,10)
+(s,5)
+(t,12)
+(u,3)
+(w,6)
+
+
+OrderCnt
+(o,15)
+(a,13)
+(t,12)
+(p,10)
+(i,10)
+(c,9)
+(w,6)
+(b,6)
+(s,5)
+(f,4)
+(d,3)
+(T,3)
+(m,3)
+(u,3)
+(g,2)
+(A,2)
+(U,1)
+(l,1)
+(S,1)
+(I,1)
+(E,1)
+(D,1)
+
+
+result
+(o,15)
+(a,13)
+(t,12)
+(p,10)
+(i,10)
+(c,9)
+(w,6)
+(b,6)
+(s,5)
+(f,4)
+*/
+
+
+==========================================================================================
+
+[2B]
+make a new dir for our 2nd pig project, name it   2-PigMktdata
+
+In that dir,  create and edit a  mktdata.txt file
+
+Sales, John, 65000.00, 35
+Sales, Mary, 73500.00, 42
+Sales, Tom, 70600.00, 33
+Marketing, Sue, 54700.00, 64
+Marketing, Alice, 63750.00, 31
+Marketing, Ben, 55600.00, 29
+
+
+Also in 2-PigMktdata dir,  create a new mktdata.pig  file  
+
+
+
+Edit that file:
+   
+Aset = LOAD 'mktdata.txt' USING PigStorage(',') AS (dept:chararray, emp:chararray, salary:float);  
+DUMP Aset;
+
+
+Now run that Pig script from in that dir
+
+
+bcuser@autumn14:~/PigStuff/PigJobs/1-PigMktData$        pig -x local mktdata.pig
+
+We are running the local version, not using the HDFS.
+
+Look at your screen output to see that the script did input the data and then dumped it out to your screen.
+The data will be hiding in tons of output.  Notice we ignored the last field  (age)
+
+==================================================================
+
+[3]  STORE  (If you wanted to save the data in a file instead of DUMPing to the screen)
+
+Edit the pig script, and replace the 
+   DUMP Aset;
+with
+
+STORE Aset INTO 'mktdata_Output/ ' USING PigStorage (',');
+
+Re-run the script, go to that dir, and see the files. If there is a _SUCCESS file, it means it ran without a complier bug
+
+
+open the file part-m-00000 to see where it wrote the the "Aset" realtionship we created with our LOAD command.
+Always first DELETE the mktdata_Output directory each time before you re-run the script 
+
+Mostly we will use DUMP, but sometimes we will want to save the data to a file.
+=========================================================================
+
+[4] DESCRIBE  (this is a diagnostic command that will show you, after any relation is run, what the relation looks like.)
+
+Now replace the STORE command with
+
+DESCRIBE Aset;
+
+
+Run the script again, and towards the very bottom of the output, find this:
+
+Aset: {dept: chararray,emp: chararray,salary: float}
+
+This will show you what your Aset relationship is, and how the data fields were created, 
+moved, named, combined into tuples, bags, etc.  
+It's a good idea to do this after adding each new command, one step  at a time, 
+to make sure you are evovling the data to what you want as the end result.
+
+==================================================================
+
+[5] GROUP  is used to combine items based on some field.
+
+
+Remove the Describe command, and add 2 lines
+
+Bset = GROUP Aset BY dept;
+   
+DUMP STORE
+
+Sales,{(Sales, John,65000.0),(Sales, Mary,73500.0),(Sales, Tom,70600.0)}
+Marketing,{(Marketing, Sue,54700.0),(Marketing, Alice,63750.0),(Marketing, Ben,55600.0)}
+
+you now have sort of a (key  Value)  where the value is a set of 3 tuples.  You have a NEW realtionship, Bset
+
+====================================================================================
+
+[6] AVG  MAX  MIN  SUM  COUNT
+
+Try each of these 4 by adding this line after the GROUP, but before the STORE, 
+edit the STORE to write out the Cset, not the Bset.
+
+Cset =  FOREACH Bset GENERATE group, AVG(a.salary);
+
+Cset =  FOREACH Bset GENERATE group, MAX(a.salary);
+
+Cset =  FOREACH Bset GENERATE group, MIN(a.salary);
+
+Cset =  FOREACH Bset GENERATE group, SUM(Aset.salary);                 /* GROUP in caps fails, must be lower case */
+
+Cset =  FOREACH Bset GENERATE SUM(Aset.salary);                                /* without word group */
+
+Cset = FOREACH Bset GENERATE group, COUNT(a.salary);
+
+==================================================================================
+[7] 
+
+Aset = LOAD 'mktdata.txt' USING PigStorage(',') AS (dept:chararray, emp:chararray, salary:float, age:int);  
+
+Bset = ORDER Aset BY age DESC;
+
+DUMP Bset;
+
+======================================================================================
+
+[8] 
+
+Aset = LOAD 'mktdata.txt' USING PigStorage(',') AS (dept:chararray, emp:chararray, salary:float, age:int);  
+
+Bset = FOREACH Aset GENERATE emp, salary;
+
+Bset = FOREACH Aset GENERATE emp, {dept, {salary, age}};
+
+
+[9] FLATTEN
+Flatten un-nests tuples as well as bags. 
+consider a relation that has a tuple of the form (a, (b, c)). 
+The expression GENERATE $0, flatten($1), will cause that tuple to become (a, b, c).
+
+Bset = FOREACH Aset GENERATE emp, dept, {salary, age};
+
+Cset =   FOREACH Bset GENERATE $0, $1,flatten($2);                       /* using positions    OR  */
+Cset =   FOREACH Bset GENERATE emp, dept, flatten($2);           /* using names and positions */
+
+
+
+
+
+

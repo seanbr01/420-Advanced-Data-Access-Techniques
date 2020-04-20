@@ -1,0 +1,27 @@
+Good on-line book
+http://chimera.labs.oreilly.com/books/1234000001811/ch05.html#pl_general
+
+Good article
+http://www.dummies.com/how-to/content/hadoop-pig-and-pig-latin-for-big-data.html
+
+The Pig cheat sheet (has everything you need, you just have to learn to speak this data flow language)
+http://mortar-public-site-content.s3-website-us-east-1.amazonaws.com/Mortar-Pig-Cheat-Sheet.pdf
+
+More very useful info
+http://pig.apache.org/docs/r0.10.0/basic.html
+
+
+https://www.tutorialspoint.com/apache_pig/index.htm
+
+My PPT
+2-PigLanguage.pptx
+
+3A-SomePigCode.pptx
+
+https://bigdatauniversity.com/courses/introduction-to-pig/
+
+Search !!!
+
+https://stackoverflow.com/questions/18544602/how-to-flatten-a-group-into-a-single-tuple-in-pig
+
+
