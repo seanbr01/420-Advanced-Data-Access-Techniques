@@ -1,0 +1,54 @@
+WORDCOUNT
+
+A = load './input.txt';
+B = foreach A generate flatten(TOKENIZE((chararray)$0)) as word;
+C = group B by word;
+D = foreach C generate COUNT(B), group;
+store D into './wordcount';/* 
+
+=======================================
+Book Join
+
+A = LOAD ‘KingJamesBible.txt'; 
+B = FOREACH A GENERATE FLATTEN(TOKENIZE((chararray)$0)) AS word; 
+C = FILTER B BY word MATCHES '\\w+'; 
+D = GROUP C BY word; 
+E = FOREACH D GENERATE COUNT(C), group; 
+STORE E INTO 'bible_freq';
+
+Do same thing for RomeoAndJuliet.txt, store into romeo_freq
+
+bard = LOAD ‘romeo_freq’ AS (freq, word); 
+kjv = LOAD ‘bible_freq’ AS (freq, word); 
+inboth = JOIN bard BY word, kjv BY word; 
+DUMP inboth  
+
+
+===================================================
+public database of cities example  at   https://chimpler.wordpress.com/2013/02/04/playing-with-hadoop-pig/
+ 
+/* start by loading the CSV file and display it: */
+/*The first line maps the different columns in the CSV to fields which are by default chararray (e.g., city:chararray).*/
+data = LOAD 'location.csv' USING PigStorage(',')  
+AS (locId, country, region, city, postalCode, latitude, longitude, metroCode, areaCode);
+/* get rid of info don’t need and only keep city, region and country: */
+cities = FOREACH data GENERATE city, region, country;  
+/* only keep US cities where the city name is set: */
+usCities = FILTER cities BY country == '"US"' AND city != '""';
+/* Group by city */
+cityGroups = GROUP usCities BY city; 
+/** In the CSV file, the same city can appear many times in a state, so we first
+* need to make sure to remove duplicate states using DISTINCT.
+* Note that we can access the cityGroups fields 'group' the key used for grouping
+* and 'usCities' as the value of the group.*/
+numStatesByCities = FOREACH cityGroups {
+        states = DISTINCT usCities.region;
+       GENERATE    FLATTEN(group) AS city,    COUNT(states) as numStates;
+}; 
+/* Order cities by number of occurrences in states */ 
+sortedCitiesByNumStates = ORDER numStatesByCities BY numStates DESC; 
+/* Only keep the first 10 cities */
+result = LIMIT sortedCitiesByNumStates 10;
+store result into './citiesdata';
+
+
