@@ -15,8 +15,19 @@ Cut and paste the downloaded pig-0.16.0.tar.gz file  to that new directory
 
 Extract it there, then  delete the gz file  (our VMs will run out of virutal disk space, empty your trash often)
 
-Add Pig it to your path,  (You have to do this each time you re-start you VM, unless you copy it into your startup script!)
+Add Pig it to your path,  (You have to do this each time you re-start you VM, unless you edit your .bashrc file)
 export PATH=/home/bcuser/pigstuff/pig-0.16.0/bin:$PATH
+
+use pcmanfm (the file explorer) make sure showing hidden files is enabled.
+Go to bcuser folder, find  .bashrc file
+open with geany and add this as the last line
+export PATH=/home/bcuser/pigstuff/pig-0.16.0/bin:$PATH
+save the file
+logout,
+login
+
+Now pig will always be available.
+
 
 
 Verify it works:
@@ -29,7 +40,7 @@ Verify it works:
 See this article:   https://www.javatpoint.com/pig-example 
  to see where I got my code ideas.
 
-Now in /home/bcuser/PigStuff  make a directory called PigJobs 
+Now in /home/bcuser/pigstuff  make a directory called pigjobs 
 (we will have many pig jobs inside this dir) 
 
 and in that dir, make a new dir for our 1st pig project, name it   1-MostStartingLetter
@@ -67,6 +78,11 @@ OrderCnt = ORDER countletter  BY  $1  DESC;
 result  = LIMIT    OrderCnt    10;  
 
 DUMP result;
+
+
+
+
+
 
 then enter this command in a console at that directory:    pig -x local firstLetter.pig
 
