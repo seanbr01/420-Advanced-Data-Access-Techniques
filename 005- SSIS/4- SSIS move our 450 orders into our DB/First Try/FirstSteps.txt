@@ -1,0 +1,33 @@
+export, already is a CSV
+
+import to excel, save as 2003 type spreadsheer
+
+Add new top row, lable columns
+
+get rid of dup's  (Exchange, Symbol, Date)
+
+get rid of all else, save
+Symbol	Date	High	Volume	Div
+
+
+sort by date  Chop off stuff at top and bottom until you all of, but only
+2007, 2008, 2009	
+
+Then sort by Symbol, AtoZ and 2ndary Date, oldest to newest.
+
+open SSMS
+
+Create new database, Stock
+
+create new table
+Symbol  nvarchar(10)
+Date  smalldatetime
+High  smallmoney
+Volume  bigint
+Div  decimal(5,4)
+
+do not allow nulls for any
+select Symbol and Date and make that pair the primary key
+save as table Data
+
+now import last stage of XLS into that table
