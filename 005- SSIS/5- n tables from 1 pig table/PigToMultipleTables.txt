@@ -1,0 +1,15 @@
+take raw PIG data
+
+using selected subsets of rows, create 2 or more spreadsheets, one for each table.
+sort by key, and remove duplicates in the "dimension" spreadsheets.
+
+Set appropriate column to be primary key (click on the little yellow key icon), do not tell SQL to autogenerate key.
+
+Use SSMS, create new Database, and new tables for each spreadsheet.
+create a table diagram and set up the PK FK relationships
+
+import each XLS into each table (I removed the header, top row, in my spreadsheets first)
+
+Do the "dimension tables" first, as they can be created with no referential integrity issues.
+
+Lastly, do your "data" table, which will have forign keys that must exist in the other tables.
