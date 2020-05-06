@@ -1,4 +1,0 @@
-in List Controller
- $scope.create = function () {
-            $scope.edit = { movie: { title: "", runtime: 0, releaseYear: 0 } };
-        };
