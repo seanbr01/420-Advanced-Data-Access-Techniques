@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Order App</title>
+</head>
+<body>
+
+    <div>
+        <h1>450 Orders from API (Sean Bruce)</h1>
+        <p>Click button to get all 450 orders from DB.</p>
+        <input type="button" value="Get Orders" onclick="findAll();" />
+        <ul id="orders" />
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="orderId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="order" />
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <!--<script>
+        var uri = 'api/orders';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#orders'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.ID + ': $' + item.Price;
+        }
+
+        function find() {
+            var id = $('#orderId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#orders').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#order').text('Error: ' + err);
+                });
+        }
+    </script>-->
+
+    <script src="./Scripts/MyScript.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe.config
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.csprojResolveAssemblyReference.cache
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.Form1.resources
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.Properties.Resources.resources
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.csproj.GenerateResource.Cache
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.pdb
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\bin\Debug\EntityFramework.dll
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\bin\Debug\EntityFramework.xml
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.exe
+c:\users\kurt.friedrich\documents\visual studio 2013\Projects\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.pdb
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-Prog210 EnterpriseWebII-Winter15\Module-13-EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe.config
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-Prog210 EnterpriseWebII-Winter15\Module-13-EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.exe
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-Prog210 EnterpriseWebII-Winter15\Module-13-EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.pdb
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-ISIT420-AdvDataAccess\5-ASP-MVCandEF\EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe.config
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-ISIT420-AdvDataAccess\5-ASP-MVCandEF\EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.exe
+C:\Users\kurt.friedrich\Google Drive\BellevueCollege\AAA-ISIT420-AdvDataAccess\5-ASP-MVCandEF\EntityFramework\Part-1\FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.pdb
+C:\Users\kurt.friedrich\Desktop\AAA-Winter2017\ISIT-420winter17\5-ASP-MVCandEF\1-EntityFramework\Part-1\1-FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe.config
+C:\Users\kurt.friedrich\Desktop\AAA-Winter2017\ISIT-420winter17\5-ASP-MVCandEF\1-EntityFramework\Part-1\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.exe
+C:\Users\kurt.friedrich\Desktop\AAA-Winter2017\ISIT-420winter17\5-ASP-MVCandEF\1-EntityFramework\Part-1\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.pdb
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe.config
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.exe
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\bin\Debug\FirstEntFrame.pdb
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\bin\Debug\EntityFramework.dll
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\bin\Debug\EntityFramework.xml
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.csprojResolveAssemblyReference.cache
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.Form1.resources
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.Properties.Resources.resources
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.csproj.GenerateResource.Cache
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.csproj.CoreCompileInputs.cache
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.exe
+C:\Users\kurt.friedrich\Desktop\AAA-ISIT-420winter18\5-ASP-MVCandEF\1-EntityFramework\1-FirstEntFrame\FirstEntFrame\obj\Debug\FirstEntFrame.pdb

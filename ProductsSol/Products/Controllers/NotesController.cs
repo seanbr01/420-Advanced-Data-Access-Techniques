@@ -24,12 +24,12 @@ namespace Products.Controllers
 
         public IHttpActionResult GetNote(int id)
         {
-            var product = notes.FirstOrDefault((p) => p.NoteId == id);
-            if (product == null)
+            var note = notes.FirstOrDefault((p) => p.NoteId == id);
+            if (note == null)
             {
                 return NotFound();
             }
-            return Ok(product);
+            return Ok(note);
         }
     }
 
