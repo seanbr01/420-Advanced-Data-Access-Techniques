@@ -4,7 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NodeOrdersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NodeOrdersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CDTable">
+          <Key>
+            <PropertyRef Name="CdID" />
+          </Key>
+          <Property Name="CdID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CDname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Artist" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RecordCompany" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearReleased" Type="int" Nullable="false" />
+          <Property Name="ListPrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CdID" Type="int" Nullable="false" />
+          <Property Name="ItemQuantity" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="OrdersID" />
@@ -16,11 +35,113 @@
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Datetime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="SalesPersonTable">
+          <Key>
+            <PropertyRef Name="SalesPersonID" />
+          </Key>
+          <Property Name="SalesPersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="StoreNumberID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreTable">
+          <Key>
+            <PropertyRef Name="StoreNumberID" />
+          </Key>
+          <Property Name="StoreNumberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberEmployees" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Inventory_CDTable">
+          <End Role="CDTable" Type="Self.CDTable" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CDTable">
+              <PropertyRef Name="CdID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="CdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CDTable">
+          <End Role="CDTable" Type="Self.CDTable" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CDTable">
+              <PropertyRef Name="CdID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_SalesPersonTable">
+          <End Role="SalesPersonTable" Type="Self.SalesPersonTable" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPersonTable">
+              <PropertyRef Name="SalesPersonID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SalesPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_StoreTable">
+          <End Role="StoreTable" Type="Self.StoreTable" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="StoreNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesPersonTable_StoreTable">
+          <End Role="StoreTable" Type="Self.StoreTable" Multiplicity="1" />
+          <End Role="SalesPersonTable" Type="Self.SalesPersonTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Principal>
+            <Dependent Role="SalesPersonTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="NodeOrdersModelStoreContainer">
+          <EntitySet Name="CDTable" EntityType="Self.CDTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesPersonTable" EntityType="Self.SalesPersonTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreTable" EntityType="Self.StoreTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Inventory_CDTable" Association="Self.FK_Inventory_CDTable">
+            <End Role="CDTable" EntitySet="CDTable" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CDTable" Association="Self.FK_Orders_CDTable">
+            <End Role="CDTable" EntitySet="CDTable" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_SalesPersonTable" Association="Self.FK_Orders_SalesPersonTable">
+            <End Role="SalesPersonTable" EntitySet="SalesPersonTable" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_StoreTable" Association="Self.FK_Orders_StoreTable">
+            <End Role="StoreTable" EntitySet="StoreTable" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesPersonTable_StoreTable" Association="Self.FK_SalesPersonTable_StoreTable">
+            <End Role="StoreTable" EntitySet="StoreTable" />
+            <End Role="SalesPersonTable" EntitySet="SalesPersonTable" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NodeOrdersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -34,11 +155,143 @@
           <Property Name="CdID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CDTable" Relationship="NodeOrdersModel.FK_Orders_CDTable" FromRole="Order" ToRole="CDTable" />
+          <NavigationProperty Name="SalesPersonTable" Relationship="NodeOrdersModel.FK_Orders_SalesPersonTable" FromRole="Order" ToRole="SalesPersonTable" />
+          <NavigationProperty Name="StoreTable" Relationship="NodeOrdersModel.FK_Orders_StoreTable" FromRole="Order" ToRole="StoreTable" />
         </EntityType>
         <EntityContainer Name="NodeOrdersEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Orders" EntityType="Self.Order" />
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="CDTables" EntityType="NodeOrdersModel.CDTable" />
+          <EntitySet Name="Inventories" EntityType="NodeOrdersModel.Inventory" />
+          <EntitySet Name="SalesPersonTables" EntityType="NodeOrdersModel.SalesPersonTable" />
+          <EntitySet Name="StoreTables" EntityType="NodeOrdersModel.StoreTable" />
+          <AssociationSet Name="FK_Inventory_CDTable" Association="NodeOrdersModel.FK_Inventory_CDTable">
+            <End Role="CDTable" EntitySet="CDTables" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CDTable" Association="NodeOrdersModel.FK_Orders_CDTable">
+            <End Role="CDTable" EntitySet="CDTables" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_SalesPersonTable" Association="NodeOrdersModel.FK_Orders_SalesPersonTable">
+            <End Role="SalesPersonTable" EntitySet="SalesPersonTables" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_StoreTable" Association="NodeOrdersModel.FK_Orders_StoreTable">
+            <End Role="StoreTable" EntitySet="StoreTables" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesPersonTable_StoreTable" Association="NodeOrdersModel.FK_SalesPersonTable_StoreTable">
+            <End Role="StoreTable" EntitySet="StoreTables" />
+            <End Role="SalesPersonTable" EntitySet="SalesPersonTables" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CDTable">
+          <Key>
+            <PropertyRef Name="CdID" />
+          </Key>
+          <Property Name="CdID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CDname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Artist" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecordCompany" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearReleased" Type="Int32" Nullable="false" />
+          <Property Name="ListPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Inventories" Relationship="NodeOrdersModel.FK_Inventory_CDTable" FromRole="CDTable" ToRole="Inventory" />
+          <NavigationProperty Name="Orders" Relationship="NodeOrdersModel.FK_Orders_CDTable" FromRole="CDTable" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CdID" Type="Int32" Nullable="false" />
+          <Property Name="ItemQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CDTable" Relationship="NodeOrdersModel.FK_Inventory_CDTable" FromRole="Inventory" ToRole="CDTable" />
+        </EntityType>
+        <EntityType Name="SalesPersonTable">
+          <Key>
+            <PropertyRef Name="SalesPersonID" />
+          </Key>
+          <Property Name="SalesPersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="StoreNumberID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="NodeOrdersModel.FK_Orders_SalesPersonTable" FromRole="SalesPersonTable" ToRole="Order" />
+          <NavigationProperty Name="StoreTable" Relationship="NodeOrdersModel.FK_SalesPersonTable_StoreTable" FromRole="SalesPersonTable" ToRole="StoreTable" />
+        </EntityType>
+        <EntityType Name="StoreTable">
+          <Key>
+            <PropertyRef Name="StoreNumberID" />
+          </Key>
+          <Property Name="StoreNumberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberEmployees" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="NodeOrdersModel.FK_Orders_StoreTable" FromRole="StoreTable" ToRole="Order" />
+          <NavigationProperty Name="SalesPersonTables" Relationship="NodeOrdersModel.FK_SalesPersonTable_StoreTable" FromRole="StoreTable" ToRole="SalesPersonTable" />
+        </EntityType>
+        <Association Name="FK_Inventory_CDTable">
+          <End Type="NodeOrdersModel.CDTable" Role="CDTable" Multiplicity="1" />
+          <End Type="NodeOrdersModel.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CDTable">
+              <PropertyRef Name="CdID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="CdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CDTable">
+          <End Type="NodeOrdersModel.CDTable" Role="CDTable" Multiplicity="1" />
+          <End Type="NodeOrdersModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CDTable">
+              <PropertyRef Name="CdID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_SalesPersonTable">
+          <End Type="NodeOrdersModel.SalesPersonTable" Role="SalesPersonTable" Multiplicity="1" />
+          <End Type="NodeOrdersModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPersonTable">
+              <PropertyRef Name="SalesPersonID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SalesPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_StoreTable">
+          <End Type="NodeOrdersModel.StoreTable" Role="StoreTable" Multiplicity="1" />
+          <End Type="NodeOrdersModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="StoreNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesPersonTable_StoreTable">
+          <End Type="NodeOrdersModel.StoreTable" Role="StoreTable" Multiplicity="1" />
+          <End Type="NodeOrdersModel.SalesPersonTable" Role="SalesPersonTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Principal>
+            <Dependent Role="SalesPersonTable">
+              <PropertyRef Name="StoreNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -53,6 +306,48 @@
                 <ScalarProperty Name="CdID" ColumnName="CdID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CDTables">
+            <EntityTypeMapping TypeName="NodeOrdersModel.CDTable">
+              <MappingFragment StoreEntitySet="CDTable">
+                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+                <ScalarProperty Name="YearReleased" ColumnName="YearReleased" />
+                <ScalarProperty Name="RecordCompany" ColumnName="RecordCompany" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="CDname" ColumnName="CDname" />
+                <ScalarProperty Name="CdID" ColumnName="CdID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="NodeOrdersModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="CdID" ColumnName="CdID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesPersonTables">
+            <EntityTypeMapping TypeName="NodeOrdersModel.SalesPersonTable">
+              <MappingFragment StoreEntitySet="SalesPersonTable">
+                <ScalarProperty Name="StoreNumberID" ColumnName="StoreNumberID" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SalesPersonID" ColumnName="SalesPersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreTables">
+            <EntityTypeMapping TypeName="NodeOrdersModel.StoreTable">
+              <MappingFragment StoreEntitySet="StoreTable">
+                <ScalarProperty Name="NumberEmployees" ColumnName="NumberEmployees" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StoreNumberID" ColumnName="StoreNumberID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -105,9 +105,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CDTable.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CdsOver11Controller.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\SalesPersonController.cs" />
+    <Compile Include="Controllers\SalespersonPerformanceController.cs" />
+    <Compile Include="Controllers\StorePerformanceController.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs" />
     <Compile Include="Order.cs">
@@ -129,6 +140,12 @@
       <DependentUpon>OrderModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesPersonTable.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreTable.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="OrderModel.edmx">

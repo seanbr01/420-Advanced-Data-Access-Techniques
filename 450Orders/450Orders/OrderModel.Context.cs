@@ -26,5 +26,9 @@ namespace _450Orders
         }
     
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<CDTable> CDTables { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<SalesPersonTable> SalesPersonTables { get; set; }
+        public virtual DbSet<StoreTable> StoreTables { get; set; }
     }
 }

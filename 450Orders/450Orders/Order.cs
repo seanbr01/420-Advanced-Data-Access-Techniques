@@ -20,5 +20,9 @@ namespace _450Orders
         public int CdID { get; set; }
         public int Price { get; set; }
         public System.DateTime Datetime { get; set; }
+    
+        public virtual CDTable CDTable { get; set; }
+        public virtual SalesPersonTable SalesPersonTable { get; set; }
+        public virtual StoreTable StoreTable { get; set; }
     }
 }

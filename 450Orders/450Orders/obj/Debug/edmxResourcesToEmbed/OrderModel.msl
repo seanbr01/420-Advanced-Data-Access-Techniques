@@ -13,5 +13,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CDTables">
+      <EntityTypeMapping TypeName="NodeOrdersModel.CDTable">
+        <MappingFragment StoreEntitySet="CDTable">
+          <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+          <ScalarProperty Name="YearReleased" ColumnName="YearReleased" />
+          <ScalarProperty Name="RecordCompany" ColumnName="RecordCompany" />
+          <ScalarProperty Name="Artist" ColumnName="Artist" />
+          <ScalarProperty Name="CDname" ColumnName="CDname" />
+          <ScalarProperty Name="CdID" ColumnName="CdID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="NodeOrdersModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+          <ScalarProperty Name="CdID" ColumnName="CdID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesPersonTables">
+      <EntityTypeMapping TypeName="NodeOrdersModel.SalesPersonTable">
+        <MappingFragment StoreEntitySet="SalesPersonTable">
+          <ScalarProperty Name="StoreNumberID" ColumnName="StoreNumberID" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SalesPersonID" ColumnName="SalesPersonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreTables">
+      <EntityTypeMapping TypeName="NodeOrdersModel.StoreTable">
+        <MappingFragment StoreEntitySet="StoreTable">
+          <ScalarProperty Name="NumberEmployees" ColumnName="NumberEmployees" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StoreNumberID" ColumnName="StoreNumberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

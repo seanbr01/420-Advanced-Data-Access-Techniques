@@ -5,8 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3643327cf1f442e68eb76cc0e2589b59" Name="Diagram1">
-        <EntityTypeShape EntityType="NodeOrdersModel.Order" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-      </Diagram>
+        <EntityTypeShape EntityType="NodeOrdersModel.Order" Width="1.5" PointX="2.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NodeOrdersModel.CDTable" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="NodeOrdersModel.Inventory" Width="1.5" PointX="5.5" PointY="4.875" />
+        <EntityTypeShape EntityType="NodeOrdersModel.SalesPersonTable" Width="1.5" PointX="2.875" PointY="4.75" />
+        <EntityTypeShape EntityType="NodeOrdersModel.StoreTable" Width="1.5" PointX="0.5" PointY="1" />
+        <AssociationConnector Association="NodeOrdersModel.FK_Inventory_CDTable" />
+        <AssociationConnector Association="NodeOrdersModel.FK_Orders_CDTable" />
+        <AssociationConnector Association="NodeOrdersModel.FK_Orders_SalesPersonTable" />
+        <AssociationConnector Association="NodeOrdersModel.FK_Orders_StoreTable" />
+        <AssociationConnector Association="NodeOrdersModel.FK_SalesPersonTable_StoreTable" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
