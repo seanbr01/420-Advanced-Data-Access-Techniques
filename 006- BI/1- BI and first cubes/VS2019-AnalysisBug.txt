@@ -1,0 +1,3 @@
+One thing we’ve noticed is that for VS 2019, sometimes you can get a better experience by following this trick:
+“Navigate to Tools in the Menu bar, then click ‘Options’. Next, under the Environment tab click ‘General’ and
+uncheck the option 'Optimize rendering for screens with different pixel densities'.”

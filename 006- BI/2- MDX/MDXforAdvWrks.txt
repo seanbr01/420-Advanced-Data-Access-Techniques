@@ -1,0 +1,89 @@
+Tricky with the (  )   {  }  ,  
+
+1
+SELECT
+([Dim Sales Territory].[Sales Territory Country]) ON ROWS,
+[Measures].[Sales Amount] ON COLUMNS
+From  [AdvWksDWCube]
+
+
+2
+SELECT
+([Dim Sales Territory].[Sales Territory Country]) ON COLUMNS,
+[Measures].[Sales Amount] ON ROWS
+From  [AdvWksDWCube]
+
+Query preparation failed.
+The query cannot be prepared: The query must have at least one axis. The first axis of the query should not have multiple hierarchies, nor should it reference any dimension other than the Measures dimension..
+
+
+
+3
+SELECT
+([Dim Sales Territory].[Sales Territory Country]).Members ON ROWS,
+[Measures].[Sales Amount] ON COLUMNS
+From  [AdvWksDWCube]
+
+4
+SELECT
+([Dim Sales Territory].[Sales Territory Country]).Children ON ROWS,
+[Measures].[Sales Amount] ON COLUMNS
+From  [AdvWksDWCube]
+
+
+5
+SELECT
+([Dim Sales Territory].[Sales Territory Country]).Children ON ROWS,
+{[Measures].[Sales Amount], [Measures].[Order quantity]} ON COLUMNS
+From  [AdvWksDWCube]
+
+6
+SELECT
+NONEMPTY (
+[Dim Sales Territory].[Sales Territory Country].Children ) ON ROWS,
+{[Measures].[Sales Amount], [Measures].[Order quantity]} ON COLUMNS
+From  [AdvWksDWCube]
+
+
+7
+SELECT
+TOPCOUNT(
+{([Dim Sales Territory].[Sales Territory Country].Children )}, 3) ON ROWS,
+{[Measures].[Sales Amount], [Measures].[Order quantity]} ON COLUMNS
+From  [AdvWksDWCube]
+
+
+8
+SELECT
+NONEMPTY (
+{([Dim Sales Territory].[Sales Territory Country].Children )} ) ON ROWS,
+{[Measures].[Sales Amount], [Measures].[Order Quantity], [Measures].[Total Product Cost], [Measures].[Tax Amt] } ON COLUMNS
+From  [AdvWksDWCube]
+
+
+9
+SELECT
+NONEMPTY (
+{([Dim Product].[Model Name].Children, [Dim Sales Territory].[Sales Territory Country].Children )} ) ON ROWS,
+{[Measures].[Sales Amount], [Measures].[Order Quantity] } ON COLUMNS
+From  [AdvWksDWCube]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
