@@ -1,0 +1,50 @@
+[1] find 2 data sources that have some field in common
+
+[2] get data as CSV files
+
+[3]  think through the ultimate design of your SQL database tables.
+
+	[a]  date   max    min   Precip  (new  key ID)
+
+	[b]  incident number ==> new key ID  Incident_Type=>key  Occured_date_tim     Officer ID  Subject_Race   Subject_Gender
+
+	[c]  key  Incident_Type
+
+[4] import each into PIG 
+  - clean data for unusable rows
+  - remove unneeded columns
+  - make any other needed data transformations (esp dates)
+  - run as many pig jobs as needed to create unique outputs, one for each desired SQL table
+
+working on one, testing load  using DESCRIBE
+Aset: {oldID: chararray,ID: int,level: chararray,date: chararray,precinct: chararray,sector: chararray,beat: chararray,officerID: int,subjectID: int,race: chararray,gender: chararray}
+
+Bset: {ID: int,level: chararray,date: chararray,officerID: int,subjectID: int,race: chararray,gender: chararray}
+
+https://www.tutorialspoint.com/apache_pig/apache_pig_date_time_functions.htm
+
+https://www.youtube.com/watch?v=-V2W8l8b4bA
+
+used CASE statement to generate secondary key
+
+ID, officerID, subjectID, race, gender, date,    level   (1,2,3)
+
+ date, max, min, precip, newsnow;
+
+make sure to get rid of any row with what will be a duplicate key in your SQL or any column with a blank field.
+
+
+
+[5] SSIS 
+  - build SQL DB and empty tables
+  - convert csv file to Excel 97-2003  workbook  (note, have added first row with names)
+  - import the CSV files into the appropriate tables
+  - (had a few snow fields empty, plugge to 0 in xls, 
+  - imported incidents  clicked allow identity insert
+
+[6] write ASP API app 
+     build EF over new db
+     do queries on table.
+
+
+
