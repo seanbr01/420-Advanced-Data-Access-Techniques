@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ISIT420ModelStoreContainer" CdmEntityContainer="ISIT420Entities">
+    <EntitySetMapping Name="CensusBureaux">
+      <EntityTypeMapping TypeName="ISIT420Model.CensusBureau">
+        <MappingFragment StoreEntitySet="CensusBureau">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Population" ColumnName="Population" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FBIs">
+      <EntityTypeMapping TypeName="ISIT420Model.FBI">
+        <MappingFragment StoreEntitySet="FBI">
+          <ScalarProperty Name="MoterVehicleTheft" ColumnName="MoterVehicleTheft" />
+          <ScalarProperty Name="LarcenyTheft" ColumnName="LarcenyTheft" />
+          <ScalarProperty Name="Burglary" ColumnName="Burglary" />
+          <ScalarProperty Name="PropertyCrime" ColumnName="PropertyCrime" />
+          <ScalarProperty Name="Assault" ColumnName="Assault" />
+          <ScalarProperty Name="Robbery" ColumnName="Robbery" />
+          <ScalarProperty Name="Rape" ColumnName="Rape" />
+          <ScalarProperty Name="Murder" ColumnName="Murder" />
+          <ScalarProperty Name="ViolentCrime" ColumnName="ViolentCrime" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISIT420Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CensusBureau">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Population" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ISIT420Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CensusBureaux" EntityType="Self.CensusBureau" />
+    <EntitySet Name="FBIs" EntityType="ISIT420Model.FBI" />
+  </EntityContainer>
+  <EntityType Name="FBI">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="ViolentCrime" />
+      <PropertyRef Name="Murder" />
+      <PropertyRef Name="Rape" />
+      <PropertyRef Name="Robbery" />
+      <PropertyRef Name="Assault" />
+      <PropertyRef Name="PropertyCrime" />
+      <PropertyRef Name="Burglary" />
+      <PropertyRef Name="LarcenyTheft" />
+      <PropertyRef Name="MoterVehicleTheft" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="ViolentCrime" Type="Int32" Nullable="false" />
+    <Property Name="Murder" Type="Int32" Nullable="false" />
+    <Property Name="Rape" Type="Int32" Nullable="false" />
+    <Property Name="Robbery" Type="Int32" Nullable="false" />
+    <Property Name="Assault" Type="Int32" Nullable="false" />
+    <Property Name="PropertyCrime" Type="Int32" Nullable="false" />
+    <Property Name="Burglary" Type="Int32" Nullable="false" />
+    <Property Name="LarcenyTheft" Type="Int32" Nullable="false" />
+    <Property Name="MoterVehicleTheft" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>

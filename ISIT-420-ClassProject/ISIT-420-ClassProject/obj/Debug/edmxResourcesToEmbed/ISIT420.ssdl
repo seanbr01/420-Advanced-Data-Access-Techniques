@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISIT420Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CensusBureau">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Population" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ISIT420.dbo.FBI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FBI">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="ViolentCrime" />
+      <PropertyRef Name="Murder" />
+      <PropertyRef Name="Rape" />
+      <PropertyRef Name="Robbery" />
+      <PropertyRef Name="Assault" />
+      <PropertyRef Name="PropertyCrime" />
+      <PropertyRef Name="Burglary" />
+      <PropertyRef Name="LarcenyTheft" />
+      <PropertyRef Name="MoterVehicleTheft" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="ViolentCrime" Type="int" Nullable="false" />
+    <Property Name="Murder" Type="int" Nullable="false" />
+    <Property Name="Rape" Type="int" Nullable="false" />
+    <Property Name="Robbery" Type="int" Nullable="false" />
+    <Property Name="Assault" Type="int" Nullable="false" />
+    <Property Name="PropertyCrime" Type="int" Nullable="false" />
+    <Property Name="Burglary" Type="int" Nullable="false" />
+    <Property Name="LarcenyTheft" Type="int" Nullable="false" />
+    <Property Name="MoterVehicleTheft" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ISIT420ModelStoreContainer">
+    <EntitySet Name="CensusBureau" EntityType="Self.CensusBureau" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FBI" EntityType="Self.FBI" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FBI].[ID] AS [ID], 
+    [FBI].[Year] AS [Year], 
+    [FBI].[ViolentCrime] AS [ViolentCrime], 
+    [FBI].[Murder] AS [Murder], 
+    [FBI].[Rape] AS [Rape], 
+    [FBI].[Robbery] AS [Robbery], 
+    [FBI].[Assault] AS [Assault], 
+    [FBI].[PropertyCrime] AS [PropertyCrime], 
+    [FBI].[Burglary] AS [Burglary], 
+    [FBI].[LarcenyTheft] AS [LarcenyTheft], 
+    [FBI].[MoterVehicleTheft] AS [MoterVehicleTheft]
+    FROM [dbo].[FBI] AS [FBI]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
