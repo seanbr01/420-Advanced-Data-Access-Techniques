@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISIT420_RevisedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CensusBureau">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="YearID" Type="int" Nullable="false" />
+    <Property Name="Population" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FBI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="YearID" Type="int" Nullable="false" />
+    <Property Name="ViolentCrime" Type="int" Nullable="false" />
+    <Property Name="Murder" Type="int" Nullable="false" />
+    <Property Name="Rape" Type="int" Nullable="false" />
+    <Property Name="Robbery" Type="int" Nullable="false" />
+    <Property Name="Assault" Type="int" Nullable="false" />
+    <Property Name="PropertyCrime" Type="int" Nullable="false" />
+    <Property Name="Burglary" Type="int" Nullable="false" />
+    <Property Name="LarcenyTheft" Type="int" Nullable="false" />
+    <Property Name="MoterVehicleTheft" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Year">
+    <Key>
+      <PropertyRef Name="YearID" />
+    </Key>
+    <Property Name="YearID" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CensusBur__YearI__3B75D760">
+    <End Role="Year" Type="Self.Year" Multiplicity="1" />
+    <End Role="CensusBureau" Type="Self.CensusBureau" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="CensusBureau">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FBI__YearID__3E52440B">
+    <End Role="Year" Type="Self.Year" Multiplicity="1" />
+    <End Role="FBI" Type="Self.FBI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="FBI">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ISIT420_RevisedModelStoreContainer">
+    <EntitySet Name="CensusBureau" EntityType="Self.CensusBureau" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FBI" EntityType="Self.FBI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CensusBur__YearI__3B75D760" Association="Self.FK__CensusBur__YearI__3B75D760">
+      <End Role="Year" EntitySet="Year" />
+      <End Role="CensusBureau" EntitySet="CensusBureau" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FBI__YearID__3E52440B" Association="Self.FK__FBI__YearID__3E52440B">
+      <End Role="Year" EntitySet="Year" />
+      <End Role="FBI" EntitySet="FBI" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

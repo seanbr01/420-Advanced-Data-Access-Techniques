@@ -163,14 +163,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="CensusBureau.cs">
-      <DependentUpon>ISIT420.tt</DependentUpon>
+      <DependentUpon>ISIT420_Revised.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CensusController.cs" />
     <Compile Include="Controllers\FbiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ISIT420Controller.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="FBI.cs">
-      <DependentUpon>ISIT420.tt</DependentUpon>
+      <DependentUpon>ISIT420_Revised.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,9 +191,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ISIT420.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ISIT420_Revised.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISIT420_Revised.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISIT420_Revised.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISIT420_Revised.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISIT420_Revised.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISIT420_Revised.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Census.cs" />
     <Compile Include="Models\Fbi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Year.cs">
+      <DependentUpon>ISIT420_Revised.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -213,6 +232,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ISIT420.edmx</DependentUpon>
       <LastGenOutput>ISIT420.cs</LastGenOutput>
+    </Content>
+    <Content Include="ISIT420_Revised.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ISIT420_Revised.edmx</DependentUpon>
+      <LastGenOutput>ISIT420_Revised.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ISIT420_Revised.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ISIT420_Revised.edmx</DependentUpon>
+      <LastGenOutput>ISIT420_Revised.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -241,6 +270,13 @@
     </EntityDeploy>
     <Content Include="ISIT420.edmx.diagram">
       <DependentUpon>ISIT420.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="ISIT420_Revised.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ISIT420_Revised.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ISIT420_Revised.edmx.diagram">
+      <DependentUpon>ISIT420_Revised.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

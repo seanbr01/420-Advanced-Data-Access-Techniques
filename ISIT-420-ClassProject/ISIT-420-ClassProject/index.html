@@ -7,15 +7,40 @@
 <body>
 
     <div>
-        <h2>Click button to get all Census stats from DB.</h2>
-        <input type="button" value="Get Census" onclick="findCensus();" />
-        <ul id="Censuses" />
+        <h2>Click button to get Frist and Last recorded year.</h2>
+        <!--<input type="button" value="Get Stats" onclick="findFirstLast();" />-->
+        <select id="yearSelect" onchange="searchByYear();"></select>
+        <ul id="ByYear" />
     </div>
 
     <div>
-        <h2>Click button to get all FBI stats from DB.</h2>
-        <input type="button" value="Get Fbis" onclick="findFbi();" />
-        <ul id="fbis" />
+        <h2>Click button to get Years Population vs Murders.</h2>
+        <input type="button" value="Get Stats" onclick="findPopVMurder();" />
+        <ul id="PopVMurder" />
+    </div>
+
+    <div>
+        <h2>Click button to get Years Population vs Violent Crime.</h2>
+        <input type="button" value="Get Stats" onclick="findPopVViolentCrime();" />
+        <ul id="PopVViolentCrime" />
+    </div>
+
+    <div>
+        <h2>Click button to get all Census stats from DB. (Combined All Tables)</h2>
+        <input type="button" value="Get All" onclick="findCombined();" />
+        <ul id="Combined" />
+    </div>
+
+    <div>
+        <h2>Click button to get all Census stats from DB. (Revised)</h2>
+        <input type="button" value="Get Census" onclick="findCensusRevised();" />
+        <ul id="CensusesRevised" />
+    </div>
+
+    <div>
+        <h2>Click button to get all FBI stats from DB. (Revised)</h2>
+        <input type="button" value="Get Fbis" onclick="findFbiRevised();" />
+        <ul id="fbisRevised" />
     </div>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>

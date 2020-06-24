@@ -1,43 +1,112 @@
-﻿var uriFbi = 'api/Fbi/GetAll';
-var uriCensus = 'api/Census/GetAll';
+﻿var uriFbiRevised = 'api/ISIT420/GetAllFbi';
+var uriCensusRevised = 'api/ISIT420/GetAllCensus';
+var uriFbiCensus = 'api/ISIT420/GetAllFbisAndCensus';
+var uriPopVMurder = 'api/ISIT420/GetAllPopulationVersusMurder';
+var uriPopVViolent = 'api/ISIT420/GetAllPopulationVersusViolentCrime';
+var uriFirstLast = 'api/ISIT420/GetFristLast';
+var uriYears = 'api/ISIT420/GetAllYears';
+var uriGetByYear = 'api/ISIT420/GetByYear';
 
 $(document).ready(function () {
 
-    //let people = $('#peopleSelect');
-    //people.empty();
-    //people.append('<option selected="true" disabled>Choose Person</option>');
-    //people.prop('selectedIndex', 0);
+    let store = $('#yearSelect');
+    store.empty();
+    store.append('<option selected="true" disabled>Choose Year</option>');
+    store.prop('selectedIndex', 0);
 
-    //$.getJSON(uriPeople).done(function (data) {
-    //    $.each(data, function (key, item) {
-    //        people.append($('<option></option>').attr('value', item.SalesPersonID).text(`${item.FirstName} ${item.LastName}`));
-    //    });
-    //});
+    $.getJSON(uriYears).done(function (data) {
+        $.each(data, function (key, item) {
+            store.append($('<option></option>').attr('value', item.YearID).text(`${item.Year1}`));
+        });
+    });
 
 });
 
-function formatCensusItem(item) {
-    return `ID: ${item.ID}, Year: ${item.Year}, Population: ${item.Population}`;
+function clearDisplay(display) {
+    let view = $(display);
+    view.empty();
 }
 
-function findCensus() {
-    $.getJSON(uriCensus)
+function createDisplay(uri, display, format) {
+    $.getJSON(uri)
         .done(function (data) {
             $.each(data, function (key, item) {
-                $('<li>', { text: formatCensusItem(item) }).appendTo($('#Censuses'));
+                $('<li>', { text: format(item) }).appendTo($(display));
             });
         });
 }
 
-function formatFbiItem(item) {
-    return `ID: ${item.ID}, Year: ${item.Year}, Murder: ${item.Murder}, ViolentCrime: ${item.ViolentCrime}, Robbery: ${item.Robbery}, Assault: ${item.Assault}, PropertyCrime: ${item.PropertyCrime}, Burglary: ${item.Burglary}, LarcenyTheft: ${item.LarcenyTheft}, MoterVehicleTheft: ${item.MoterVehicleTheft}`;
-}
-
-function findFbi() {
-    $.getJSON(uriFbi)
+function searchByYear() {
+    $('#ByYear').text('');
+    //alert(document.getElementById("yearSelect").value);
+    var id = document.getElementById("yearSelect").value;
+    $.getJSON(`${uriGetByYear}/${id}`)
         .done(function (data) {
             $.each(data, function (key, item) {
-                $('<li>', { text: formatFbiItem(item) }).appendTo($('#fbis'));
+                $('<li>', { text: formatByYear(item) }).appendTo($('#ByYear'));
             });
         });
+}
+
+function formatByYear(item) {
+    return `Year: ${item.Year1}, Population: ${item.Population}, Murder: ${item.Murder}
+            , ViolentCrime: ${item.ViolentCrime}, Robbery: ${item.Robbery}, Assault: ${item.Assault}
+            , PropertyCrime: ${item.PropertyCrime}, Burglary: ${item.Burglary}
+            , LarcenyTheft: ${item.LarcenyTheft}, MoterVehicleTheft: ${item.MoterVehicleTheft}`;
+}
+
+//function findFirstLast() {
+//    clearDisplay('#ByYear');
+//    createDisplay(uriFirstLast, '#ByYear', formatByYear);
+//}
+
+function formatPopVMurder(item) {
+    return `Year: ${item.Year1}, Population: ${item.Population}, Murder: ${item.Murder}`;
+}
+
+function findPopVMurder() {
+    clearDisplay('#PopVMurder');
+    createDisplay(uriPopVMurder, '#PopVMurder', formatPopVMurder);
+}
+
+function formatPopVViolentCrime(item) {
+    return `Year: ${item.Year1}, Population: ${item.Population}, Violent Crime: ${item.ViolentCrime}`;
+}
+
+function findPopVViolentCrime() {
+    clearDisplay('#PopVViolentCrime');
+    createDisplay(uriPopVViolent, '#PopVViolentCrime', formatPopVViolentCrime);
+}
+
+function formatFbiCensusItem(item) {
+    return `FbiID: ${item.ID}, YearID: ${item.YearID}, Year: ${item.Year1}, Population: ${item.Population}
+            , Murder: ${item.Murder}, ViolentCrime: ${item.ViolentCrime}, Robbery: ${item.Robbery}, Assault: ${item.Assault}
+            , PropertyCrime: ${item.PropertyCrime}, Burglary: ${item.Burglary}
+            , LarcenyTheft: ${item.LarcenyTheft}, MoterVehicleTheft: ${item.MoterVehicleTheft}`;
+}
+
+function findCombined() {
+    clearDisplay('#Combined');
+    createDisplay(uriFbiCensus, '#Combined', formatFbiCensusItem);
+}
+
+function formatCensusItemRevised(item) {
+    return `ID: ${item.ID}, YearID: ${item.YearID}, Year: ${item.Year1}, Population: ${item.Population}`;
+}
+
+function findCensusRevised() {
+    clearDisplay('#CensusesRevised');
+    createDisplay(uriCensusRevised, '#CensusesRevised', formatCensusItemRevised);
+}
+
+function formatFbiItemRevised(item) {
+    return `ID: ${item.ID}, YearID: ${item.YearID}, Year: ${item.Year1}, Murder: ${item.Murder}
+            , ViolentCrime: ${item.ViolentCrime}, Robbery: ${item.Robbery}, Assault: ${item.Assault}
+            , PropertyCrime: ${item.PropertyCrime}, Burglary: ${item.Burglary}, LarcenyTheft: ${item.LarcenyTheft}
+            , MoterVehicleTheft: ${item.MoterVehicleTheft}`;
+}
+
+function findFbiRevised() {
+    clearDisplay('#fbisRevised');
+    createDisplay(uriFbiRevised, '#fbisRevised', formatFbiItemRevised);
 }

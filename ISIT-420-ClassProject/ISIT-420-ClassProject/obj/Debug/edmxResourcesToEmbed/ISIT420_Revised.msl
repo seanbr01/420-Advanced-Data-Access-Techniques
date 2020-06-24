@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ISIT420_RevisedModelStoreContainer" CdmEntityContainer="ISIT420_RevisedEntities">
+    <EntitySetMapping Name="CensusBureaux">
+      <EntityTypeMapping TypeName="ISIT420_RevisedModel.CensusBureau">
+        <MappingFragment StoreEntitySet="CensusBureau">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
+          <ScalarProperty Name="Population" ColumnName="Population" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FBIs">
+      <EntityTypeMapping TypeName="ISIT420_RevisedModel.FBI">
+        <MappingFragment StoreEntitySet="FBI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
+          <ScalarProperty Name="ViolentCrime" ColumnName="ViolentCrime" />
+          <ScalarProperty Name="Murder" ColumnName="Murder" />
+          <ScalarProperty Name="Rape" ColumnName="Rape" />
+          <ScalarProperty Name="Robbery" ColumnName="Robbery" />
+          <ScalarProperty Name="Assault" ColumnName="Assault" />
+          <ScalarProperty Name="PropertyCrime" ColumnName="PropertyCrime" />
+          <ScalarProperty Name="Burglary" ColumnName="Burglary" />
+          <ScalarProperty Name="LarcenyTheft" ColumnName="LarcenyTheft" />
+          <ScalarProperty Name="MoterVehicleTheft" ColumnName="MoterVehicleTheft" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Years">
+      <EntityTypeMapping TypeName="ISIT420_RevisedModel.Year">
+        <MappingFragment StoreEntitySet="Year">
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
+          <ScalarProperty Name="Year1" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

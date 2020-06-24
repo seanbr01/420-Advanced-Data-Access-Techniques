@@ -8,7 +8,7 @@ namespace ISIT_420_ClassProject.Models
     public class Fbi
     {
         public int ID { get; set; }
-        public int Year { get; set; }
+        public int YearID { get; set; }
         public int Murder { get; set; }
         public int ViolentCrime { get; set; }
         public int Rape { get; set; }

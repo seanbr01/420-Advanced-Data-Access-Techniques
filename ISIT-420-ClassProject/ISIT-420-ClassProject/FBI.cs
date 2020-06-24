@@ -15,7 +15,7 @@ namespace ISIT_420_ClassProject
     public partial class FBI
     {
         public int ID { get; set; }
-        public int Year { get; set; }
+        public int YearID { get; set; }
         public int ViolentCrime { get; set; }
         public int Murder { get; set; }
         public int Rape { get; set; }
@@ -25,5 +25,7 @@ namespace ISIT_420_ClassProject
         public int Burglary { get; set; }
         public int LarcenyTheft { get; set; }
         public int MoterVehicleTheft { get; set; }
+    
+        public virtual Year Year { get; set; }
     }
 }

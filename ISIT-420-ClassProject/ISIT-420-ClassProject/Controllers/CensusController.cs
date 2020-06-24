@@ -10,6 +10,7 @@ namespace ISIT_420_ClassProject.Controllers
     public class CensusController : ApiController
     {
         ISIT420Entities myEntities = new ISIT420Entities();
+        ISIT420_RevisedEntities myRevisedEntities = new ISIT420_RevisedEntities();
 
         [Route("api/Census/GetAll")]
         [HttpGet]
@@ -26,6 +27,24 @@ namespace ISIT_420_ClassProject.Controllers
 
             myEntities.Configuration.ProxyCreationEnabled = false;
             return Json(myEntities.CensusBureaux);
+        }
+
+        [Route("api/Census/GetAllRevised")]
+        [HttpGet]
+        public IHttpActionResult GetAllCensusRevised()
+        {
+            var stats = from stat in myRevisedEntities.CensusBureaux
+                        from year in myRevisedEntities.Years
+                        where stat.YearID == year.YearID
+
+                        select new
+                        {
+                            year.Year1,
+                            stat.ID,
+                            year.YearID,
+                            stat.Population
+                        };
+            return Json(stats);
         }
     }
 }

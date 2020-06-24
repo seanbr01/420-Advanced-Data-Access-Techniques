@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISIT420_RevisedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CensusBureau">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="YearID" Type="Int32" Nullable="false" />
+    <Property Name="Population" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Year" Relationship="Self.FK__CensusBur__YearI__3B75D760" FromRole="CensusBureau" ToRole="Year" />
+  </EntityType>
+  <EntityType Name="FBI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="YearID" Type="Int32" Nullable="false" />
+    <Property Name="ViolentCrime" Type="Int32" Nullable="false" />
+    <Property Name="Murder" Type="Int32" Nullable="false" />
+    <Property Name="Rape" Type="Int32" Nullable="false" />
+    <Property Name="Robbery" Type="Int32" Nullable="false" />
+    <Property Name="Assault" Type="Int32" Nullable="false" />
+    <Property Name="PropertyCrime" Type="Int32" Nullable="false" />
+    <Property Name="Burglary" Type="Int32" Nullable="false" />
+    <Property Name="LarcenyTheft" Type="Int32" Nullable="false" />
+    <Property Name="MoterVehicleTheft" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Year" Relationship="Self.FK__FBI__YearID__3E52440B" FromRole="FBI" ToRole="Year" />
+  </EntityType>
+  <EntityType Name="Year">
+    <Key>
+      <PropertyRef Name="YearID" />
+    </Key>
+    <Property Name="YearID" Type="Int32" Nullable="false" />
+    <Property Name="Year1" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CensusBureaux" Relationship="Self.FK__CensusBur__YearI__3B75D760" FromRole="Year" ToRole="CensusBureau" />
+    <NavigationProperty Name="FBIs" Relationship="Self.FK__FBI__YearID__3E52440B" FromRole="Year" ToRole="FBI" />
+  </EntityType>
+  <Association Name="FK__CensusBur__YearI__3B75D760">
+    <End Role="Year" Type="Self.Year" Multiplicity="1" />
+    <End Role="CensusBureau" Type="Self.CensusBureau" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="CensusBureau">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FBI__YearID__3E52440B">
+    <End Role="Year" Type="Self.Year" Multiplicity="1" />
+    <End Role="FBI" Type="Self.FBI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="FBI">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ISIT420_RevisedEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CensusBureaux" EntityType="Self.CensusBureau" />
+    <EntitySet Name="FBIs" EntityType="Self.FBI" />
+    <EntitySet Name="Years" EntityType="Self.Year" />
+    <AssociationSet Name="FK__CensusBur__YearI__3B75D760" Association="Self.FK__CensusBur__YearI__3B75D760">
+      <End Role="Year" EntitySet="Years" />
+      <End Role="CensusBureau" EntitySet="CensusBureaux" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FBI__YearID__3E52440B" Association="Self.FK__FBI__YearID__3E52440B">
+      <End Role="Year" EntitySet="Years" />
+      <End Role="FBI" EntitySet="FBIs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
